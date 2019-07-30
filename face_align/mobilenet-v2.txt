@@ -1,0 +1,653 @@
+Layer (type)                                        Output Shape            Param #     Previous Layer
+========================================================================================================================
+data(null)                                          3x224x224               0
+________________________________________________________________________________________________________________________
+stage0_conv0_fwd(Convolution)                       32x112x112              864         data
+________________________________________________________________________________________________________________________
+stage0_batchnorm0_fwd(BatchNorm)                    32x112x112              64          stage0_conv0_fwd
+________________________________________________________________________________________________________________________
+stage0_relu6_fwd(clip)                              32x112x112              0           stage0_batchnorm0_fwd
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_expand_conv0_fwd(Convolution)  32x112x112              1024        stage0_relu6_fwd
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_expand_batchnorm0_fwd(BatchNorm32x112x112              64          stage0_expandedconv0_expand_conv
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_expand_relu6_fwd(clip)         32x112x112              0           stage0_expandedconv0_expand_batc
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_dwise_conv0_fwd(Convolution)   32x112x112              288         stage0_expandedconv0_expand_relu
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_dwise_batchnorm0_fwd(BatchNorm)32x112x112              64          stage0_expandedconv0_dwise_conv0
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_dwise_relu6_fwd(clip)          32x112x112              0           stage0_expandedconv0_dwise_batch
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_linear_conv0_fwd(Convolution)  16x112x112              512         stage0_expandedconv0_dwise_relu6
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_linear_batchnorm0_fwd(BatchNorm16x112x112              32          stage0_expandedconv0_linear_conv
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_expand_conv0_fwd(Convolution)  96x112x112              1536        stage0_expandedconv0_linear_batc
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_expand_batchnorm0_fwd(BatchNorm96x112x112              192         stage1_expandedconv0_expand_conv
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_expand_relu6_fwd(clip)         96x112x112              0           stage1_expandedconv0_expand_batc
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_dwise_conv0_fwd(Convolution)   96x56x56                864         stage1_expandedconv0_expand_relu
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_dwise_batchnorm0_fwd(BatchNorm)96x56x56                192         stage1_expandedconv0_dwise_conv0
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_dwise_relu6_fwd(clip)          96x56x56                0           stage1_expandedconv0_dwise_batch
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_linear_conv0_fwd(Convolution)  24x56x56                2304        stage1_expandedconv0_dwise_relu6
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_linear_batchnorm0_fwd(BatchNorm24x56x56                48          stage1_expandedconv0_linear_conv
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_expand_conv0_fwd(Convolution)  144x56x56               3456        stage1_expandedconv0_linear_batc
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_expand_batchnorm0_fwd(BatchNorm144x56x56               288         stage1_expandedconv1_expand_conv
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_expand_relu6_fwd(clip)         144x56x56               0           stage1_expandedconv1_expand_batc
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_dwise_conv0_fwd(Convolution)   144x56x56               1296        stage1_expandedconv1_expand_relu
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_dwise_batchnorm0_fwd(BatchNorm)144x56x56               288         stage1_expandedconv1_dwise_conv0
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_dwise_relu6_fwd(clip)          144x56x56               0           stage1_expandedconv1_dwise_batch
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_linear_conv0_fwd(Convolution)  24x56x56                3456        stage1_expandedconv1_dwise_relu6
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_linear_batchnorm0_fwd(BatchNorm24x56x56                48          stage1_expandedconv1_linear_conv
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_elemwise_add0(elemwise_add)    24x56x56                0           stage1_expandedconv1_linear_batc
+                                                                                        stage1_expandedconv0_linear_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_expand_conv0_fwd(Convolution)  144x56x56               3456        stage1_expandedconv1_elemwise_ad
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_expand_batchnorm0_fwd(BatchNorm144x56x56               288         stage2_expandedconv0_expand_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_expand_relu6_fwd(clip)         144x56x56               0           stage2_expandedconv0_expand_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_dwise_conv0_fwd(Convolution)   144x28x28               1296        stage2_expandedconv0_expand_relu
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_dwise_batchnorm0_fwd(BatchNorm)144x28x28               288         stage2_expandedconv0_dwise_conv0
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_dwise_relu6_fwd(clip)          144x28x28               0           stage2_expandedconv0_dwise_batch
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_linear_conv0_fwd(Convolution)  32x28x28                4608        stage2_expandedconv0_dwise_relu6
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_linear_batchnorm0_fwd(BatchNorm32x28x28                64          stage2_expandedconv0_linear_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_expand_conv0_fwd(Convolution)  192x28x28               6144        stage2_expandedconv0_linear_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_expand_batchnorm0_fwd(BatchNorm192x28x28               384         stage2_expandedconv1_expand_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_expand_relu6_fwd(clip)         192x28x28               0           stage2_expandedconv1_expand_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_dwise_conv0_fwd(Convolution)   192x28x28               1728        stage2_expandedconv1_expand_relu
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_dwise_batchnorm0_fwd(BatchNorm)192x28x28               384         stage2_expandedconv1_dwise_conv0
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_dwise_relu6_fwd(clip)          192x28x28               0           stage2_expandedconv1_dwise_batch
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_linear_conv0_fwd(Convolution)  32x28x28                6144        stage2_expandedconv1_dwise_relu6
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_linear_batchnorm0_fwd(BatchNorm32x28x28                64          stage2_expandedconv1_linear_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_elemwise_add0(elemwise_add)    32x28x28                0           stage2_expandedconv1_linear_batc
+                                                                                        stage2_expandedconv0_linear_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_expand_conv0_fwd(Convolution)  192x28x28               6144        stage2_expandedconv1_elemwise_ad
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_expand_batchnorm0_fwd(BatchNorm192x28x28               384         stage2_expandedconv2_expand_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_expand_relu6_fwd(clip)         192x28x28               0           stage2_expandedconv2_expand_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_dwise_conv0_fwd(Convolution)   192x28x28               1728        stage2_expandedconv2_expand_relu
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_dwise_batchnorm0_fwd(BatchNorm)192x28x28               384         stage2_expandedconv2_dwise_conv0
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_dwise_relu6_fwd(clip)          192x28x28               0           stage2_expandedconv2_dwise_batch
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_linear_conv0_fwd(Convolution)  32x28x28                6144        stage2_expandedconv2_dwise_relu6
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_linear_batchnorm0_fwd(BatchNorm32x28x28                64          stage2_expandedconv2_linear_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_elemwise_add0(elemwise_add)    32x28x28                0           stage2_expandedconv2_linear_batc
+                                                                                        stage2_expandedconv1_elemwise_ad
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_expand_conv0_fwd(Convolution)192x28x28               6144        stage2_expandedconv2_elemwise_ad
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_expand_batchnorm0_fwd(BatchNo192x28x28               384         stage3_0_expandedconv0_expand_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_expand_relu6_fwd(clip)       192x28x28               0           stage3_0_expandedconv0_expand_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_dwise_conv0_fwd(Convolution) 192x14x14               1728        stage3_0_expandedconv0_expand_re
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_dwise_batchnorm0_fwd(BatchNor192x14x14               384         stage3_0_expandedconv0_dwise_con
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_dwise_relu6_fwd(clip)        192x14x14               0           stage3_0_expandedconv0_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_linear_conv0_fwd(Convolution)64x14x14                12288       stage3_0_expandedconv0_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_linear_batchnorm0_fwd(BatchNo64x14x14                128         stage3_0_expandedconv0_linear_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_expand_conv0_fwd(Convolution)384x14x14               24576       stage3_0_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_expand_batchnorm0_fwd(BatchNo384x14x14               768         stage3_0_expandedconv1_expand_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_expand_relu6_fwd(clip)       384x14x14               0           stage3_0_expandedconv1_expand_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_dwise_conv0_fwd(Convolution) 384x14x14               3456        stage3_0_expandedconv1_expand_re
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_dwise_batchnorm0_fwd(BatchNor384x14x14               768         stage3_0_expandedconv1_dwise_con
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_dwise_relu6_fwd(clip)        384x14x14               0           stage3_0_expandedconv1_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_linear_conv0_fwd(Convolution)64x14x14                24576       stage3_0_expandedconv1_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_linear_batchnorm0_fwd(BatchNo64x14x14                128         stage3_0_expandedconv1_linear_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_elemwise_add0(elemwise_add)  64x14x14                0           stage3_0_expandedconv1_linear_ba
+                                                                                        stage3_0_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_expand_conv0_fwd(Convolution)384x14x14               24576       stage3_0_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_expand_batchnorm0_fwd(BatchNo384x14x14               768         stage3_0_expandedconv2_expand_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_expand_relu6_fwd(clip)       384x14x14               0           stage3_0_expandedconv2_expand_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_dwise_conv0_fwd(Convolution) 384x14x14               3456        stage3_0_expandedconv2_expand_re
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_dwise_batchnorm0_fwd(BatchNor384x14x14               768         stage3_0_expandedconv2_dwise_con
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_dwise_relu6_fwd(clip)        384x14x14               0           stage3_0_expandedconv2_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_linear_conv0_fwd(Convolution)64x14x14                24576       stage3_0_expandedconv2_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_linear_batchnorm0_fwd(BatchNo64x14x14                128         stage3_0_expandedconv2_linear_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_elemwise_add0(elemwise_add)  64x14x14                0           stage3_0_expandedconv2_linear_ba
+                                                                                        stage3_0_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_expand_conv0_fwd(Convolution)384x14x14               24576       stage3_0_expandedconv2_elemwise_
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_expand_batchnorm0_fwd(BatchNo384x14x14               768         stage3_0_expandedconv3_expand_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_expand_relu6_fwd(clip)       384x14x14               0           stage3_0_expandedconv3_expand_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_dwise_conv0_fwd(Convolution) 384x14x14               3456        stage3_0_expandedconv3_expand_re
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_dwise_batchnorm0_fwd(BatchNor384x14x14               768         stage3_0_expandedconv3_dwise_con
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_dwise_relu6_fwd(clip)        384x14x14               0           stage3_0_expandedconv3_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_linear_conv0_fwd(Convolution)64x14x14                24576       stage3_0_expandedconv3_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_linear_batchnorm0_fwd(BatchNo64x14x14                128         stage3_0_expandedconv3_linear_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_elemwise_add0(elemwise_add)  64x14x14                0           stage3_0_expandedconv3_linear_ba
+                                                                                        stage3_0_expandedconv2_elemwise_
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_expand_conv0_fwd(Convolution)384x14x14               24576       stage3_0_expandedconv3_elemwise_
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_expand_batchnorm0_fwd(BatchNo384x14x14               768         stage3_1_expandedconv0_expand_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_expand_relu6_fwd(clip)       384x14x14               0           stage3_1_expandedconv0_expand_ba
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_dwise_conv0_fwd(Convolution) 384x14x14               3456        stage3_1_expandedconv0_expand_re
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_dwise_batchnorm0_fwd(BatchNor384x14x14               768         stage3_1_expandedconv0_dwise_con
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_dwise_relu6_fwd(clip)        384x14x14               0           stage3_1_expandedconv0_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_linear_conv0_fwd(Convolution)96x14x14                36864       stage3_1_expandedconv0_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_linear_batchnorm0_fwd(BatchNo96x14x14                192         stage3_1_expandedconv0_linear_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_expand_conv0_fwd(Convolution)576x14x14               55296       stage3_1_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_expand_batchnorm0_fwd(BatchNo576x14x14               1152        stage3_1_expandedconv1_expand_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_expand_relu6_fwd(clip)       576x14x14               0           stage3_1_expandedconv1_expand_ba
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_dwise_conv0_fwd(Convolution) 576x14x14               5184        stage3_1_expandedconv1_expand_re
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_dwise_batchnorm0_fwd(BatchNor576x14x14               1152        stage3_1_expandedconv1_dwise_con
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_dwise_relu6_fwd(clip)        576x14x14               0           stage3_1_expandedconv1_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_linear_conv0_fwd(Convolution)96x14x14                55296       stage3_1_expandedconv1_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_linear_batchnorm0_fwd(BatchNo96x14x14                192         stage3_1_expandedconv1_linear_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_elemwise_add0(elemwise_add)  96x14x14                0           stage3_1_expandedconv1_linear_ba
+                                                                                        stage3_1_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_expand_conv0_fwd(Convolution)576x14x14               55296       stage3_1_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_expand_batchnorm0_fwd(BatchNo576x14x14               1152        stage3_1_expandedconv2_expand_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_expand_relu6_fwd(clip)       576x14x14               0           stage3_1_expandedconv2_expand_ba
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_dwise_conv0_fwd(Convolution) 576x14x14               5184        stage3_1_expandedconv2_expand_re
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_dwise_batchnorm0_fwd(BatchNor576x14x14               1152        stage3_1_expandedconv2_dwise_con
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_dwise_relu6_fwd(clip)        576x14x14               0           stage3_1_expandedconv2_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_linear_conv0_fwd(Convolution)96x14x14                55296       stage3_1_expandedconv2_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_linear_batchnorm0_fwd(BatchNo96x14x14                192         stage3_1_expandedconv2_linear_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_elemwise_add0(elemwise_add)  96x14x14                0           stage3_1_expandedconv2_linear_ba
+                                                                                        stage3_1_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_expand_conv0_fwd(Convolution)576x14x14               55296       stage3_1_expandedconv2_elemwise_
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_expand_batchnorm0_fwd(BatchNo576x14x14               1152        stage4_0_expandedconv0_expand_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_expand_relu6_fwd(clip)       576x14x14               0           stage4_0_expandedconv0_expand_ba
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_dwise_conv0_fwd(Convolution) 576x7x7                 5184        stage4_0_expandedconv0_expand_re
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_dwise_batchnorm0_fwd(BatchNor576x7x7                 1152        stage4_0_expandedconv0_dwise_con
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_dwise_relu6_fwd(clip)        576x7x7                 0           stage4_0_expandedconv0_dwise_bat
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_linear_conv0_fwd(Convolution)160x7x7                 92160       stage4_0_expandedconv0_dwise_rel
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_linear_batchnorm0_fwd(BatchNo160x7x7                 320         stage4_0_expandedconv0_linear_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_expand_conv0_fwd(Convolution)960x7x7                 153600      stage4_0_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_expand_batchnorm0_fwd(BatchNo960x7x7                 1920        stage4_0_expandedconv1_expand_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_expand_relu6_fwd(clip)       960x7x7                 0           stage4_0_expandedconv1_expand_ba
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_dwise_conv0_fwd(Convolution) 960x7x7                 8640        stage4_0_expandedconv1_expand_re
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_dwise_batchnorm0_fwd(BatchNor960x7x7                 1920        stage4_0_expandedconv1_dwise_con
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_dwise_relu6_fwd(clip)        960x7x7                 0           stage4_0_expandedconv1_dwise_bat
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_linear_conv0_fwd(Convolution)160x7x7                 153600      stage4_0_expandedconv1_dwise_rel
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_linear_batchnorm0_fwd(BatchNo160x7x7                 320         stage4_0_expandedconv1_linear_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_elemwise_add0(elemwise_add)  160x7x7                 0           stage4_0_expandedconv1_linear_ba
+                                                                                        stage4_0_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_expand_conv0_fwd(Convolution)960x7x7                 153600      stage4_0_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_expand_batchnorm0_fwd(BatchNo960x7x7                 1920        stage4_0_expandedconv2_expand_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_expand_relu6_fwd(clip)       960x7x7                 0           stage4_0_expandedconv2_expand_ba
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_dwise_conv0_fwd(Convolution) 960x7x7                 8640        stage4_0_expandedconv2_expand_re
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_dwise_batchnorm0_fwd(BatchNor960x7x7                 1920        stage4_0_expandedconv2_dwise_con
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_dwise_relu6_fwd(clip)        960x7x7                 0           stage4_0_expandedconv2_dwise_bat
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_linear_conv0_fwd(Convolution)160x7x7                 153600      stage4_0_expandedconv2_dwise_rel
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_linear_batchnorm0_fwd(BatchNo160x7x7                 320         stage4_0_expandedconv2_linear_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_elemwise_add0(elemwise_add)  160x7x7                 0           stage4_0_expandedconv2_linear_ba
+                                                                                        stage4_0_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_expand_conv0_fwd(Convolution)960x7x7                 153600      stage4_0_expandedconv2_elemwise_
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_expand_batchnorm0_fwd(BatchNo960x7x7                 1920        stage4_1_expandedconv0_expand_co
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_expand_relu6_fwd(clip)       960x7x7                 0           stage4_1_expandedconv0_expand_ba
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_dwise_conv0_fwd(Convolution) 960x7x7                 8640        stage4_1_expandedconv0_expand_re
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_dwise_batchnorm0_fwd(BatchNor960x7x7                 1920        stage4_1_expandedconv0_dwise_con
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_dwise_relu6_fwd(clip)        960x7x7                 0           stage4_1_expandedconv0_dwise_bat
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_linear_conv0_fwd(Convolution)320x7x7                 307200      stage4_1_expandedconv0_dwise_rel
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_linear_batchnorm0_fwd(BatchNo320x7x7                 640         stage4_1_expandedconv0_linear_co
+________________________________________________________________________________________________________________________
+stage4_2_conv0_fwd(Convolution)                     1280x7x7                409600      stage4_1_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage4_2_batchnorm0_fwd(BatchNorm)                  1280x7x7                2560        stage4_2_conv0_fwd
+________________________________________________________________________________________________________________________
+stage4_2_relu6_fwd(clip)                            1280x7x7                0           stage4_2_batchnorm0_fwd
+________________________________________________________________________________________________________________________
+pool0_fwd(Pooling)                                  1280x1x1                0           stage4_2_relu6_fwd
+________________________________________________________________________________________________________________________
+flatten0_flatten0(Flatten)                          1280                    0           pool0_fwd
+________________________________________________________________________________________________________________________
+dense0_fwd(FullyConnected)                          1000                    1281000     flatten0_flatten0
+========================================================================================================================
+Total params: 3505960
+________________________________________________________________________________________________________________________
+(gluon) frank@frank-B250M-DS3H:~/Desktop/projects/DL/faceDetection/face_mxnet/face_align$ python mobileNet-v2.py
+________________________________________________________________________________________________________________________
+Layer (type)                                        Output Shape            Param #     Previous Layer
+========================================================================================================================
+data(null)                                          3x224x224               0
+________________________________________________________________________________________________________________________
+stage0_conv0_fwd(Convolution)                       32x112x112              864         data
+________________________________________________________________________________________________________________________
+stage0_batchnorm0_fwd(BatchNorm)                    32x112x112              64          stage0_conv0_fwd
+________________________________________________________________________________________________________________________
+stage0_relu6_fwd(clip)                              32x112x112              0           stage0_batchnorm0_fwd
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_expand_conv0_fwd(Convolution)  32x112x112              1024        stage0_relu6_fwd
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_expand_batchnorm0_fwd(BatchNorm32x112x112              64          stage0_expandedconv0_expand_conv
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_expand_relu6_fwd(clip)         32x112x112              0           stage0_expandedconv0_expand_batc
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_dwise_conv0_fwd(Convolution)   32x112x112              288         stage0_expandedconv0_expand_relu
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_dwise_batchnorm0_fwd(BatchNorm)32x112x112              64          stage0_expandedconv0_dwise_conv0
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_dwise_relu6_fwd(clip)          32x112x112              0           stage0_expandedconv0_dwise_batch
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_linear_conv0_fwd(Convolution)  16x112x112              512         stage0_expandedconv0_dwise_relu6
+________________________________________________________________________________________________________________________
+stage0_expandedconv0_linear_batchnorm0_fwd(BatchNorm16x112x112              32          stage0_expandedconv0_linear_conv
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_expand_conv0_fwd(Convolution)  96x112x112              1536        stage0_expandedconv0_linear_batc
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_expand_batchnorm0_fwd(BatchNorm96x112x112              192         stage1_expandedconv0_expand_conv
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_expand_relu6_fwd(clip)         96x112x112              0           stage1_expandedconv0_expand_batc
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_dwise_conv0_fwd(Convolution)   96x56x56                864         stage1_expandedconv0_expand_relu
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_dwise_batchnorm0_fwd(BatchNorm)96x56x56                192         stage1_expandedconv0_dwise_conv0
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_dwise_relu6_fwd(clip)          96x56x56                0           stage1_expandedconv0_dwise_batch
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_linear_conv0_fwd(Convolution)  24x56x56                2304        stage1_expandedconv0_dwise_relu6
+________________________________________________________________________________________________________________________
+stage1_expandedconv0_linear_batchnorm0_fwd(BatchNorm24x56x56                48          stage1_expandedconv0_linear_conv
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_expand_conv0_fwd(Convolution)  144x56x56               3456        stage1_expandedconv0_linear_batc
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_expand_batchnorm0_fwd(BatchNorm144x56x56               288         stage1_expandedconv1_expand_conv
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_expand_relu6_fwd(clip)         144x56x56               0           stage1_expandedconv1_expand_batc
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_dwise_conv0_fwd(Convolution)   144x56x56               1296        stage1_expandedconv1_expand_relu
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_dwise_batchnorm0_fwd(BatchNorm)144x56x56               288         stage1_expandedconv1_dwise_conv0
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_dwise_relu6_fwd(clip)          144x56x56               0           stage1_expandedconv1_dwise_batch
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_linear_conv0_fwd(Convolution)  24x56x56                3456        stage1_expandedconv1_dwise_relu6
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_linear_batchnorm0_fwd(BatchNorm24x56x56                48          stage1_expandedconv1_linear_conv
+________________________________________________________________________________________________________________________
+stage1_expandedconv1_elemwise_add0(elemwise_add)    24x56x56                0           stage1_expandedconv1_linear_batc
+                                                                                        stage1_expandedconv0_linear_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_expand_conv0_fwd(Convolution)  144x56x56               3456        stage1_expandedconv1_elemwise_ad
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_expand_batchnorm0_fwd(BatchNorm144x56x56               288         stage2_expandedconv0_expand_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_expand_relu6_fwd(clip)         144x56x56               0           stage2_expandedconv0_expand_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_dwise_conv0_fwd(Convolution)   144x28x28               1296        stage2_expandedconv0_expand_relu
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_dwise_batchnorm0_fwd(BatchNorm)144x28x28               288         stage2_expandedconv0_dwise_conv0
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_dwise_relu6_fwd(clip)          144x28x28               0           stage2_expandedconv0_dwise_batch
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_linear_conv0_fwd(Convolution)  32x28x28                4608        stage2_expandedconv0_dwise_relu6
+________________________________________________________________________________________________________________________
+stage2_expandedconv0_linear_batchnorm0_fwd(BatchNorm32x28x28                64          stage2_expandedconv0_linear_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_expand_conv0_fwd(Convolution)  192x28x28               6144        stage2_expandedconv0_linear_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_expand_batchnorm0_fwd(BatchNorm192x28x28               384         stage2_expandedconv1_expand_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_expand_relu6_fwd(clip)         192x28x28               0           stage2_expandedconv1_expand_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_dwise_conv0_fwd(Convolution)   192x28x28               1728        stage2_expandedconv1_expand_relu
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_dwise_batchnorm0_fwd(BatchNorm)192x28x28               384         stage2_expandedconv1_dwise_conv0
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_dwise_relu6_fwd(clip)          192x28x28               0           stage2_expandedconv1_dwise_batch
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_linear_conv0_fwd(Convolution)  32x28x28                6144        stage2_expandedconv1_dwise_relu6
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_linear_batchnorm0_fwd(BatchNorm32x28x28                64          stage2_expandedconv1_linear_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv1_elemwise_add0(elemwise_add)    32x28x28                0           stage2_expandedconv1_linear_batc
+                                                                                        stage2_expandedconv0_linear_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_expand_conv0_fwd(Convolution)  192x28x28               6144        stage2_expandedconv1_elemwise_ad
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_expand_batchnorm0_fwd(BatchNorm192x28x28               384         stage2_expandedconv2_expand_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_expand_relu6_fwd(clip)         192x28x28               0           stage2_expandedconv2_expand_batc
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_dwise_conv0_fwd(Convolution)   192x28x28               1728        stage2_expandedconv2_expand_relu
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_dwise_batchnorm0_fwd(BatchNorm)192x28x28               384         stage2_expandedconv2_dwise_conv0
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_dwise_relu6_fwd(clip)          192x28x28               0           stage2_expandedconv2_dwise_batch
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_linear_conv0_fwd(Convolution)  32x28x28                6144        stage2_expandedconv2_dwise_relu6
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_linear_batchnorm0_fwd(BatchNorm32x28x28                64          stage2_expandedconv2_linear_conv
+________________________________________________________________________________________________________________________
+stage2_expandedconv2_elemwise_add0(elemwise_add)    32x28x28                0           stage2_expandedconv2_linear_batc
+                                                                                        stage2_expandedconv1_elemwise_ad
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_expand_conv0_fwd(Convolution)192x28x28               6144        stage2_expandedconv2_elemwise_ad
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_expand_batchnorm0_fwd(BatchNo192x28x28               384         stage3_0_expandedconv0_expand_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_expand_relu6_fwd(clip)       192x28x28               0           stage3_0_expandedconv0_expand_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_dwise_conv0_fwd(Convolution) 192x14x14               1728        stage3_0_expandedconv0_expand_re
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_dwise_batchnorm0_fwd(BatchNor192x14x14               384         stage3_0_expandedconv0_dwise_con
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_dwise_relu6_fwd(clip)        192x14x14               0           stage3_0_expandedconv0_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_linear_conv0_fwd(Convolution)64x14x14                12288       stage3_0_expandedconv0_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv0_linear_batchnorm0_fwd(BatchNo64x14x14                128         stage3_0_expandedconv0_linear_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_expand_conv0_fwd(Convolution)384x14x14               24576       stage3_0_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_expand_batchnorm0_fwd(BatchNo384x14x14               768         stage3_0_expandedconv1_expand_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_expand_relu6_fwd(clip)       384x14x14               0           stage3_0_expandedconv1_expand_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_dwise_conv0_fwd(Convolution) 384x14x14               3456        stage3_0_expandedconv1_expand_re
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_dwise_batchnorm0_fwd(BatchNor384x14x14               768         stage3_0_expandedconv1_dwise_con
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_dwise_relu6_fwd(clip)        384x14x14               0           stage3_0_expandedconv1_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_linear_conv0_fwd(Convolution)64x14x14                24576       stage3_0_expandedconv1_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_linear_batchnorm0_fwd(BatchNo64x14x14                128         stage3_0_expandedconv1_linear_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv1_elemwise_add0(elemwise_add)  64x14x14                0           stage3_0_expandedconv1_linear_ba
+                                                                                        stage3_0_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_expand_conv0_fwd(Convolution)384x14x14               24576       stage3_0_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_expand_batchnorm0_fwd(BatchNo384x14x14               768         stage3_0_expandedconv2_expand_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_expand_relu6_fwd(clip)       384x14x14               0           stage3_0_expandedconv2_expand_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_dwise_conv0_fwd(Convolution) 384x14x14               3456        stage3_0_expandedconv2_expand_re
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_dwise_batchnorm0_fwd(BatchNor384x14x14               768         stage3_0_expandedconv2_dwise_con
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_dwise_relu6_fwd(clip)        384x14x14               0           stage3_0_expandedconv2_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_linear_conv0_fwd(Convolution)64x14x14                24576       stage3_0_expandedconv2_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_linear_batchnorm0_fwd(BatchNo64x14x14                128         stage3_0_expandedconv2_linear_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv2_elemwise_add0(elemwise_add)  64x14x14                0           stage3_0_expandedconv2_linear_ba
+                                                                                        stage3_0_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_expand_conv0_fwd(Convolution)384x14x14               24576       stage3_0_expandedconv2_elemwise_
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_expand_batchnorm0_fwd(BatchNo384x14x14               768         stage3_0_expandedconv3_expand_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_expand_relu6_fwd(clip)       384x14x14               0           stage3_0_expandedconv3_expand_ba
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_dwise_conv0_fwd(Convolution) 384x14x14               3456        stage3_0_expandedconv3_expand_re
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_dwise_batchnorm0_fwd(BatchNor384x14x14               768         stage3_0_expandedconv3_dwise_con
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_dwise_relu6_fwd(clip)        384x14x14               0           stage3_0_expandedconv3_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_linear_conv0_fwd(Convolution)64x14x14                24576       stage3_0_expandedconv3_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_linear_batchnorm0_fwd(BatchNo64x14x14                128         stage3_0_expandedconv3_linear_co
+________________________________________________________________________________________________________________________
+stage3_0_expandedconv3_elemwise_add0(elemwise_add)  64x14x14                0           stage3_0_expandedconv3_linear_ba
+                                                                                        stage3_0_expandedconv2_elemwise_
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_expand_conv0_fwd(Convolution)384x14x14               24576       stage3_0_expandedconv3_elemwise_
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_expand_batchnorm0_fwd(BatchNo384x14x14               768         stage3_1_expandedconv0_expand_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_expand_relu6_fwd(clip)       384x14x14               0           stage3_1_expandedconv0_expand_ba
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_dwise_conv0_fwd(Convolution) 384x14x14               3456        stage3_1_expandedconv0_expand_re
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_dwise_batchnorm0_fwd(BatchNor384x14x14               768         stage3_1_expandedconv0_dwise_con
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_dwise_relu6_fwd(clip)        384x14x14               0           stage3_1_expandedconv0_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_linear_conv0_fwd(Convolution)96x14x14                36864       stage3_1_expandedconv0_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv0_linear_batchnorm0_fwd(BatchNo96x14x14                192         stage3_1_expandedconv0_linear_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_expand_conv0_fwd(Convolution)576x14x14               55296       stage3_1_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_expand_batchnorm0_fwd(BatchNo576x14x14               1152        stage3_1_expandedconv1_expand_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_expand_relu6_fwd(clip)       576x14x14               0           stage3_1_expandedconv1_expand_ba
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_dwise_conv0_fwd(Convolution) 576x14x14               5184        stage3_1_expandedconv1_expand_re
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_dwise_batchnorm0_fwd(BatchNor576x14x14               1152        stage3_1_expandedconv1_dwise_con
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_dwise_relu6_fwd(clip)        576x14x14               0           stage3_1_expandedconv1_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_linear_conv0_fwd(Convolution)96x14x14                55296       stage3_1_expandedconv1_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_linear_batchnorm0_fwd(BatchNo96x14x14                192         stage3_1_expandedconv1_linear_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv1_elemwise_add0(elemwise_add)  96x14x14                0           stage3_1_expandedconv1_linear_ba
+                                                                                        stage3_1_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_expand_conv0_fwd(Convolution)576x14x14               55296       stage3_1_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_expand_batchnorm0_fwd(BatchNo576x14x14               1152        stage3_1_expandedconv2_expand_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_expand_relu6_fwd(clip)       576x14x14               0           stage3_1_expandedconv2_expand_ba
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_dwise_conv0_fwd(Convolution) 576x14x14               5184        stage3_1_expandedconv2_expand_re
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_dwise_batchnorm0_fwd(BatchNor576x14x14               1152        stage3_1_expandedconv2_dwise_con
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_dwise_relu6_fwd(clip)        576x14x14               0           stage3_1_expandedconv2_dwise_bat
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_linear_conv0_fwd(Convolution)96x14x14                55296       stage3_1_expandedconv2_dwise_rel
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_linear_batchnorm0_fwd(BatchNo96x14x14                192         stage3_1_expandedconv2_linear_co
+________________________________________________________________________________________________________________________
+stage3_1_expandedconv2_elemwise_add0(elemwise_add)  96x14x14                0           stage3_1_expandedconv2_linear_ba
+                                                                                        stage3_1_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_expand_conv0_fwd(Convolution)576x14x14               55296       stage3_1_expandedconv2_elemwise_
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_expand_batchnorm0_fwd(BatchNo576x14x14               1152        stage4_0_expandedconv0_expand_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_expand_relu6_fwd(clip)       576x14x14               0           stage4_0_expandedconv0_expand_ba
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_dwise_conv0_fwd(Convolution) 576x7x7                 5184        stage4_0_expandedconv0_expand_re
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_dwise_batchnorm0_fwd(BatchNor576x7x7                 1152        stage4_0_expandedconv0_dwise_con
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_dwise_relu6_fwd(clip)        576x7x7                 0           stage4_0_expandedconv0_dwise_bat
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_linear_conv0_fwd(Convolution)160x7x7                 92160       stage4_0_expandedconv0_dwise_rel
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv0_linear_batchnorm0_fwd(BatchNo160x7x7                 320         stage4_0_expandedconv0_linear_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_expand_conv0_fwd(Convolution)960x7x7                 153600      stage4_0_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_expand_batchnorm0_fwd(BatchNo960x7x7                 1920        stage4_0_expandedconv1_expand_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_expand_relu6_fwd(clip)       960x7x7                 0           stage4_0_expandedconv1_expand_ba
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_dwise_conv0_fwd(Convolution) 960x7x7                 8640        stage4_0_expandedconv1_expand_re
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_dwise_batchnorm0_fwd(BatchNor960x7x7                 1920        stage4_0_expandedconv1_dwise_con
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_dwise_relu6_fwd(clip)        960x7x7                 0           stage4_0_expandedconv1_dwise_bat
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_linear_conv0_fwd(Convolution)160x7x7                 153600      stage4_0_expandedconv1_dwise_rel
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_linear_batchnorm0_fwd(BatchNo160x7x7                 320         stage4_0_expandedconv1_linear_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv1_elemwise_add0(elemwise_add)  160x7x7                 0           stage4_0_expandedconv1_linear_ba
+                                                                                        stage4_0_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_expand_conv0_fwd(Convolution)960x7x7                 153600      stage4_0_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_expand_batchnorm0_fwd(BatchNo960x7x7                 1920        stage4_0_expandedconv2_expand_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_expand_relu6_fwd(clip)       960x7x7                 0           stage4_0_expandedconv2_expand_ba
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_dwise_conv0_fwd(Convolution) 960x7x7                 8640        stage4_0_expandedconv2_expand_re
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_dwise_batchnorm0_fwd(BatchNor960x7x7                 1920        stage4_0_expandedconv2_dwise_con
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_dwise_relu6_fwd(clip)        960x7x7                 0           stage4_0_expandedconv2_dwise_bat
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_linear_conv0_fwd(Convolution)160x7x7                 153600      stage4_0_expandedconv2_dwise_rel
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_linear_batchnorm0_fwd(BatchNo160x7x7                 320         stage4_0_expandedconv2_linear_co
+________________________________________________________________________________________________________________________
+stage4_0_expandedconv2_elemwise_add0(elemwise_add)  160x7x7                 0           stage4_0_expandedconv2_linear_ba
+                                                                                        stage4_0_expandedconv1_elemwise_
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_expand_conv0_fwd(Convolution)960x7x7                 153600      stage4_0_expandedconv2_elemwise_
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_expand_batchnorm0_fwd(BatchNo960x7x7                 1920        stage4_1_expandedconv0_expand_co
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_expand_relu6_fwd(clip)       960x7x7                 0           stage4_1_expandedconv0_expand_ba
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_dwise_conv0_fwd(Convolution) 960x7x7                 8640        stage4_1_expandedconv0_expand_re
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_dwise_batchnorm0_fwd(BatchNor960x7x7                 1920        stage4_1_expandedconv0_dwise_con
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_dwise_relu6_fwd(clip)        960x7x7                 0           stage4_1_expandedconv0_dwise_bat
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_linear_conv0_fwd(Convolution)320x7x7                 307200      stage4_1_expandedconv0_dwise_rel
+________________________________________________________________________________________________________________________
+stage4_1_expandedconv0_linear_batchnorm0_fwd(BatchNo320x7x7                 640         stage4_1_expandedconv0_linear_co
+________________________________________________________________________________________________________________________
+stage4_2_conv0_fwd(Convolution)                     1280x7x7                409600      stage4_1_expandedconv0_linear_ba
+________________________________________________________________________________________________________________________
+stage4_2_batchnorm0_fwd(BatchNorm)                  1280x7x7                2560        stage4_2_conv0_fwd
+________________________________________________________________________________________________________________________
+stage4_2_relu6_fwd(clip)                            1280x7x7                0           stage4_2_batchnorm0_fwd
+________________________________________________________________________________________________________________________
+pool0_fwd(Pooling)                                  1280x1x1                0           stage4_2_relu6_fwd
+________________________________________________________________________________________________________________________
+flatten0_flatten0(Flatten)                          1280                    0           pool0_fwd
+________________________________________________________________________________________________________________________
+dense0_fwd(FullyConnected)                          1000                    1281000     flatten0_flatten0
+========================================================================================================================
+Total params: 3505960

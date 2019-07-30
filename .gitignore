@@ -102,3 +102,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# test data
+/data_process/train_data/
+/data_process/test_data/
+
+
+.idea/
