@@ -106,6 +106,7 @@ venv.bak/
 # test data
 /data_process/train_data/
 /data_process/test_data/
-
+/face_align/train_data/
+/face_align/test_data/
 
 .idea/
