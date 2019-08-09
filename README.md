@@ -1,5 +1,5 @@
-# mtcnn_mxnet
-A implementation of mtcnn by mxnet
+# face_mxnet
+A implementation of face alignment model by mxnet
 
 
 ## reference
