@@ -1,6 +1,7 @@
 import mxnet as mx
 import mxnet.gluon.nn as nn
 import d2lzh as d2l
+import matplotlib.pyplot as plt
 from mxnet import autograd, gluon, init, nd
 from mxnet.gluon import data as gdata, loss as gloss, model_zoo
 from mxnet.gluon import utils as gutils
@@ -9,6 +10,10 @@ import time
 import numpy as np
 import random
 import cv2
+from face_align.face_align_model import MobilenetV2
+
+epoch_list = []
+loss_list = []
 
 def get_batch_index(range, batch_size):
     batch = []
@@ -42,41 +47,49 @@ def get_batch_data(dir, batch):
     np_ys = np.array(Ys)
     mx_xs = mx.nd.array(np_xs)
     mx_ys = mx.nd.array(np_ys)
-    return train_augs(mx_xs), mx_ys
+    return transformer(mx_xs), mx_ys
 
 
 def train(train_dir, batch, net, loss, trainer, batch_size, epoches):
-    for epoch in range(epoches):
-        train_l_sum, train_acc_sum, n, m, start = 0.0, 0.0, 0, 0, time.time()
-        for bat in batch:
-            Xs, ys = get_batch_data(train_dir, bat)
-            ls = []
-            with autograd.record():
-                y_hats = net(Xs)
-                ls = [loss(y_hats, ys)]
-            for l in ls:
-                l.backward()
-            trainer.step(batch_size)
-            train_l_sum += sum([l.sum().asscalar() for l in ls])
-            n += sum([l.size for l in ls])
-        # test_acc = d2l.utils.evaluate_accuracy(test_iter, net, ctx)
-        print('epoch %d, loss %.4f, n = %d, train acc %.3f, test acc %.3f, '
-              'time %.1f sec'
-              % (epoch + 1, train_l_sum / n, n, train_acc_sum / 1.0, 1.0,
-                 time.time() - start))
+    gpu_device = mx.gpu()
+    with mx.Context(gpu_device):
+        for epoch in range(epoches):
+            train_l_sum, train_acc_sum, n, m, start = 0.0, 0.0, 0, 0, time.time()
+            for bat in batch:
+                Xs, ys = get_batch_data(train_dir, bat)
+                ls = []
+                with autograd.record():
+                    y_hats = net(Xs)
+                    ls = [loss(y_hats, ys)]
+                for l in ls:
+                    l.backward()
+                trainer.step(batch_size)
+                train_l_sum += sum([l.sum().asscalar() for l in ls])
+                # print(sum([l.sum().asscalar() for l in ls]))
+                n += sum([l.size for l in ls])
+            # test_acc = d2l.utils.evaluate_accuracy(test_iter, net, ctx)
+            epoch_list.append(epoch)
+            loss_list.append(train_l_sum / n)
+            print('epoch %d, loss %.4f, n = %d, train acc %.3f, test acc %.3f, '
+                  'time %.1f sec'
+                  % (epoch + 1, train_l_sum / n, n, train_acc_sum / 1.0, 1.0,
+                     time.time() - start))
 
 
 
 
-def train_fine_tuning(train_dir, net, learning_rate, batch_size=32, num_epochs=10, length = 1448):
+def train_fine_tuning(train_dir, net, learning_rate=0.01, batch_size=64, num_epochs=10, length = 1448):
     train_batch_idx = get_batch_index(length, batch_size)
     # ctx = d2l.try_all_gpus()
-    ctx = mx.cpu()
+    ctx = mx.gpu()
     net.collect_params().reset_ctx(ctx)
     net.hybridize()
     loss = gloss.L2Loss()
+    lr_sch = mx.lr_scheduler.FactorScheduler(200, 0.9)
+    # 即使在这里设置了base_lr，也会被外面传入的learning_rate参数覆盖
+    lr_sch.base_lr = 0.01
     trainer = gluon.Trainer(net.collect_params(), 'sgd', {
-        'learning_rate': learning_rate, 'wd': 0.5})
+        'learning_rate': learning_rate, 'wd': 0.0005, 'lr_scheduler' : lr_sch})
     train(train_dir, train_batch_idx, net, loss, trainer, batch_size, num_epochs)
 
 
@@ -98,21 +111,27 @@ test_augs = gdata.vision.transforms.Compose([
 
 
 
-# pretrained_net = model_zoo.vision.mobilenet_v2_0_25(pretrained=True)
-#
-# finetune_net = model_zoo.vision.mobilenet_v2_0_25(classes=200)
-# finetune_net.features = pretrained_net.features
-# finetune_net.output.initialize(init.Normal(sigma=0.05))
-# # output中的模型参数将在迭代中使用10倍大的学习率
-# finetune_net.output.collect_params().setattr('lr_mult', 10)
+# use pretrained mobilenetV2
+pretrained_net = model_zoo.vision.mobilenet_v2_1_0(pretrained=True)
+finetune_net = model_zoo.vision.mobilenet_v2_1_0(classes=200)
+finetune_net.features = pretrained_net.features
+finetune_net.output.initialize(init.Normal(sigma=0.05))
+# output中的模型参数将在迭代中使用10倍大的学习率
+finetune_net.output.collect_params().setattr('lr_mult', 10)
+train_fine_tuning('train_data', finetune_net, learning_rate=0.01, batch_size=32, num_epochs=160)
 
-finetune_net = model_zoo.vision.mobilenet_v2_0_25(classes=200, pretrained  = False)
+# TRANIN from start
+# finetune_net = MobilenetV2(200, 1)
+# finetune_net.initialize(init=init.Xavier())
+# train_fine_tuning('train_data', finetune_net, learning_rate=0.005, batch_size=32, num_epochs=60)
 
-# TRANIN
-finetune_net.initialize()
-train_fine_tuning('train_data', finetune_net, 0.1)
+
+
+# Save and plot
 finetune_net.save_parameters('facenet.params')
-
+plt.figure()
+plt.plot(epoch_list[1:-1], loss_list[1:-1])
+plt.show()
 
 
 
@@ -143,7 +162,7 @@ finetune_net.save_parameters('facenet.params')
 # print(out_label.shape)
 #
 # cv2.rectangle(img, (66, 67), (152, 190), (255,0,0), 1)
-# cv2.rectangle(img, (77, 39), (130, 120), (0,255,0), 1)
+# cv2.rectangle(img, (50, 67), (126, 193), (0,255,0), 1)
 # # for i in range(98):
 # #     cv2.circle(img, out_label[])
 # cv2.imshow('img', img)
