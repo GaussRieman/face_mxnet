@@ -108,5 +108,6 @@ venv.bak/
 /data_process/test_data/
 /face_align/train_data/
 /face_align/test_data/
+/data_process/cnnface/
 
 .idea/
