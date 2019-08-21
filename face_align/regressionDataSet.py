@@ -4,6 +4,7 @@ import os
 import mxnet.ndarray as nd
 import numpy as np
 import warnings
+import cv2
 
 
 class RegressionDataSet(gdata.dataset.Dataset):
@@ -36,7 +37,7 @@ class RegressionDataSet(gdata.dataset.Dataset):
         """
 
     def __init__(self, list_file, img_folder = None, flag=1, transform=None):
-        self._root = os.path.expanduser(list_file)
+        self._root = list_file
         self._flag = flag
         self._imgfolder = img_folder
         self._transform = transform
@@ -44,14 +45,13 @@ class RegressionDataSet(gdata.dataset.Dataset):
 
     def _list_images(self, root):
         self.items = []
-
         f = open(self._root)
         lines = f.readlines()
         for line in lines:
             line = line.strip().split()
             filename = line[0]
             #the conversion cannot be ignored, we can not store list as label
-            lab = np.array(line[1:])
+            lab = np.array(line[1:5])
             label = nd.array(lab)
             if os.path.isfile(filename):
                 self.items.append((filename, label))
